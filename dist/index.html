@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../styles/index.css">
+    </head>
+    <body>
+        <div class="header-row">
+            <div class="centered-title">
+                <h1>Blackjack</h1>
+            </div>
+        </div>
+
+        <div id="start-button">
+            <button onclick="startGame()" class="pushable">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">Start</span>
+            </button>
+        </div>
+
+        <div id="game-buttons">
+            <button onclick="stay()" id="stay" class="pushable">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">Stay</span>
+            </button>
+            <button onclick="hit()" id="hit" class="pushable">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">Hit</span>
+            </button>
+        </div>
+        
+        <script>let exports={};</script>
+        <script src="./main.js"></script>
+    </body>
+</html>
