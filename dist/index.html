@@ -4,36 +4,141 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="../styles/index.css">
+        <link rel="stylesheet" href="./index.css">
     </head>
     <body>
         <div class="header-row">
+            <div class="header-image">
+                <img src="./images/GoldenRodSuits.jpg" alt="">
+            </div>
             <div class="centered-title">
                 <h1>Blackjack</h1>
             </div>
+
+                <div class="bank">
+                    <p id="balance-element">Remaining Balance: $0</p>
+                </div>
+
         </div>
 
-        <div id="start-button">
-            <button onclick="startGame()" class="pushable">
-                <span class="shadow"></span>
-                <span class="edge"></span>
-                <span class="front">Start</span>
-            </button>
-        </div>
+        <div class="content">
+            <div class="message-line">
+                <div class="message">
+                    <h3 id="game-message">Press start to begin a game</h3>
+                </div>
+            </div>
 
-        <div id="game-buttons">
-            <button onclick="stay()" id="stay" class="pushable">
-                <span class="shadow"></span>
-                <span class="edge"></span>
-                <span class="front">Stay</span>
-            </button>
-            <button onclick="hit()" id="hit" class="pushable">
-                <span class="shadow"></span>
-                <span class="edge"></span>
-                <span class="front">Hit</span>
-            </button>
+
+            <div class="money">
+
+                <p id="current-hand">Current Hand:</p>
+            </div>
+            <div class="board">
+                <div class="player-side">
+                    <div class="person"> 
+                        <p id="player-name">Player</p>
+                    </div>
+    
+                    <div class="user">
+                        <div id="user-cards">
+                        </div>
+                        <p id="user-total">Your total: </p>
+                    </div>
+                </div>
+                <div class="dealer-side">
+                    <div class="person">
+                        <p id="dealer-name">Dealer</p>
+
+                    </div>
+                    <div class="dealer">
+                        <div id="dealer-cards">
+                        </div>
+                        <p id="dealer-total">Dealer's total: </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="buttons">
+                <div class="main-buttons">
+                    <div id="intro-buttons">
+                        <div id="start-button">
+                            <button onclick="startGame()" class="pushable">
+                                <span class="shadow"></span>
+                                <span class="edge"></span>
+                                <span class="front">Start</span>
+                            </button>
+                        </div>
+                        <div id="deposit-money">
+                            <button onclick="Blackjack.displayDepositMoneyOverlay()" class="pushable">
+                                <span class="shadow"></span>
+                                <span class="edge"></span>
+                                <span class="front">Deposit Money</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="play-again-button">
+                        <button onclick="startGame()" class="pushable">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Play Again</span>
+                        </button>
+                    </div>
+                    <div id="game-buttons">
+                        <button onclick="stay()" id="stay" class="pushable">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Stay</span>
+                        </button>
+                        <button onclick="hit()" id="hit" class="pushable">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Hit</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bet-options">
+                    <div class="chips" id="chips">
+                        <div class="pokerchip white pushable" id="one"></div>
+                        <div class="pokerchip red pushable" id="five"></div>
+                        <div class="pokerchip blue pushable" id="ten"></div>
+                        <div class="pokerchip green pushable" id="twenty-five"></div>
+                        <div class="pokerchip black pushable" id="one-hundred"></div>
+                    </div>
+                    <button class="pushable" id="play-hand-button">
+                        <span class="shadow"></span>
+                        <span class="edge"></span>
+                        <span class="front">Play Hand</span>
+                    </button>
+                </div>
+            </div>
+        <div id="modal-overlay">
+            <label for="modal__state" class="modal__overlay-close"></label>
+            <div class="modal">
+                <div class="modal-header">
+                    <h2>Enter an amount to deposit: </h2>
+                </div>
+                <div class="modal-content">
+                    <label for="amount">$</label>
+                    <input type="number" id="amount" name="amount" placeholder="">
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-buttons">
+                        <button id="close-modal" class="pushable">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Close</span>
+                        </button>
+                        <button onclick="saveMoney(document.getElementById('amount').value)" class="pushable" id="deposit-modal">
+                            <span class="shadow"></span>
+                            <span class="edge"></span>
+                            <span class="front">Deposit</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+        </div>
         <script>let exports={};</script>
         <script src="./main.js"></script>
     </body>

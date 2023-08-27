@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd dist && live-server",
     "bundle": "tsc -m es6 ./src/index.ts && npx webpack"
   },
   "keywords": [],
