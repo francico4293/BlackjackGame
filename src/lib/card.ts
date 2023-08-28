@@ -48,7 +48,7 @@ export class Card {
 
     private constructor(public readonly value: CardValue, public readonly suit: CardSuit) {}
 
-    public get entityValue () {
+    private get entityValue () {
         if (this.suit === CardSuit.DIAMOND) {
             return '&diams;';
         }
