@@ -36,7 +36,20 @@ var Card = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Card.prototype.render = function () {
+    Object.defineProperty(Card.prototype, "htmlContent", {
+        get: function () {
+            return '<span class="card-value-suit top">' + this.value + this.entityValue + '</span>' +
+                '<span class="card-suit">' + this.entityValue + '</span>' +
+                '<span class="card-value-suit bot">' + this.value + this.entityValue + '</span>';
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Card.prototype.render = function (element) {
+        var card = document.createElement("div");
+        card.classList.add("card", this.suit.toLowerCase());
+        card.innerHTML = this.htmlContent;
+        element.insertAdjacentElement('beforeend', card);
     };
     Card.ACE_OF_HEARTS = new Card(CardValue.ACE, CardSuit.HEART);
     Card.ACE_OF_DIAMONDS = new Card(CardValue.ACE, CardSuit.DIAMOND);

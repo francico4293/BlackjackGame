@@ -7,7 +7,9 @@ export class Player {
     }
 
     private _cards: Card[] = [];
+    private _softTotal: number = 0;
     private _money: number = 0;
+    private _hasBlackJack = false;
 
     private constructor() {}
 
@@ -15,7 +17,23 @@ export class Player {
         return this._cards;
     }
 
+    public get money() {
+        return this._money;
+    }
+
+    public get softTotal() {
+        return this._softTotal;
+    }
+
+    public get hasBlackJack() {
+        return this._hasBlackJack;
+    }
+
     public addCard(card: Card) {
+        if (this._softTotal === 11 && card.value === 11) {
+            this._softTotal += 1;
+        }
+        this._hasBlackJack = this._softTotal === 21;
         this._cards.push(card);
     }
 
@@ -25,9 +43,5 @@ export class Player {
 
     public clearCards() {
         this._cards = [];
-    }
-
-    public hasBlackJack() {
-
     }
 }

@@ -12,7 +12,7 @@ var Deck = /** @class */ (function () {
     };
     Object.defineProperty(Deck.prototype, "randomCard", {
         get: function () {
-            return this.cards[Math.floor(Math.random() * this.cards.length)];
+            return this.cards.splice(Math.floor(Math.random() * this.cards.length), 1)[0];
         },
         enumerable: false,
         configurable: true

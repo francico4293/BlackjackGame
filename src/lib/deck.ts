@@ -14,6 +14,6 @@ export class Deck {
     private constructor() {}
 
     public get randomCard() {
-        return this.cards[Math.floor(Math.random() * this.cards.length)];
+        return this.cards.splice(Math.floor(Math.random() * this.cards.length), 1)[0];
     }
 }

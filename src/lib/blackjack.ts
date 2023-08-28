@@ -41,7 +41,7 @@ export class BlackJack {
     public static readonly ONE_HUNDRED_DOLLAR_CHIP = document.getElementById('one-hundred')!;
 
     public start() {
-        BlackJack.BALANCE.innerText = `Remaining Balance: $${5000}`;
+        BlackJack.BALANCE.innerText = `Remaining Balance: $${this.player.money}`;
         BlackJack.CURRENT_HAND.innerText = 'Current Hand: $0';
         BlackJack.USER_TOTAL.textContent = 'Your total: ';
         BlackJack.DEALER_TOTAL.textContent = 'Dealer Total: ';
@@ -49,13 +49,68 @@ export class BlackJack {
         BlackJack.PLAY_AGAIN_BUTTON.style.display = 'none';
         BlackJack.USER_CARDS.innerHTML = '';
         BlackJack.DEALER_CARDS.innerHTML = '';
+        this.renderChips();
+        BlackJack.GAME_MESSAGE.innerText = "Place your bet. Press 'Play Hand' when ready"
+        BlackJack.PLAY_HAND_BUTTON.style.display = 'block';
+        BlackJack.PLAY_HAND_BUTTON.addEventListener('click', this.dealAndRenderHand);
     }
 
     public hit() {}
 
     public stay() {}
 
+    private dealAndRenderHand() {
+        for (let count = 0; count < 4; count++) {
+            count % 2 === 0
+                ? this.dealCard(this.player)
+                : this.dealCard(this.dealer)
+        }
+        this.renderHand();
+    }
+
+    private renderHand() {
+        this.player.cards.forEach(card => card.render(BlackJack.USER_CARDS));
+    }
+
+    private dealCard(player: Player) {
+        player.addCard(this.deck.randomCard);
+    }
+
+    private renderChips() {
+        if (this.player.money < 1) {
+            BlackJack.ONE_DOLLAR_CHIP.classList.add('disabled');
+        } else {
+            BlackJack.ONE_DOLLAR_CHIP.classList.remove('disabled');
+        }
+
+        if (this.player.money < 5) {
+            BlackJack.FIVE_DOLLAR_CHIP.classList.add('disabled');
+        } else {
+            BlackJack.FIVE_DOLLAR_CHIP.classList.remove('disabled');
+        }
+
+        if (this.player.money < 10) {
+            BlackJack.TEN_DOLLAR_CHIP.classList.add('disabled');
+        } else {
+            BlackJack.TEN_DOLLAR_CHIP.classList.remove('disabled');
+        }
+
+        if (this.player.money < 25) {
+            BlackJack.TWENTY_FIVE_DOLLAR_CHIP.classList.add('disabled');
+        } else {
+            BlackJack.TWENTY_FIVE_DOLLAR_CHIP.classList.remove('disabled');
+        }
+
+        if (this.player.money < 100) {
+            BlackJack.ONE_HUNDRED_DOLLAR_CHIP.classList.add('disabled');
+        } else {
+            BlackJack.ONE_HUNDRED_DOLLAR_CHIP.classList.remove('disabled');
+        }
+
+        BlackJack.CHIP_BUTTONS.style.display = 'block';
+    }
+
     public readonly deck = Deck.build();
     public readonly dealer = Player.build();
-    public readonly user = Player.build();
+    public readonly player = Player.build();
 }

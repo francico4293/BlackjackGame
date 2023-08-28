@@ -55,7 +55,16 @@ export class Card {
         return `&${this.suit.toLowerCase()};`;
     }
 
-    public render() {
+    private get htmlContent() {
+        return '<span class="card-value-suit top">' + this.value + this.entityValue + '</span>' + 
+            '<span class="card-suit">' + this.entityValue + '</span>' + 
+            '<span class="card-value-suit bot">' + this.value + this.entityValue + '</span>';
+    }
 
+    public render(element: HTMLElement) {
+        const card = document.createElement("div");
+        card.classList.add("card", this.suit.toLowerCase());
+        card.innerHTML = this.htmlContent;
+        element.insertAdjacentElement('beforeend', card);
     }
 }

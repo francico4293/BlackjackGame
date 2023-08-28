@@ -16,4 +16,12 @@ const displayDepositMoneyOverlay = () => {
     BlackJack.MODAL_OVERLAY.style.display = 'flex';
 }
 
-export { startGame, displayDepositMoneyOverlay };
+const depositMoney = (amount: number) => {
+    blackjack.player.depositMoney(amount);
+    BlackJack.MODAL_OVERLAY.style.display = 'none';
+    BlackJack.BALANCE.innerText = `Remaining Balance: $${blackjack.player.money}`;
+    BlackJack.START_BUTTON.style.display = "block";
+    BlackJack.DEPOSIT_MONEY.style.display = "none";
+}
+
+export { startGame, displayDepositMoneyOverlay, depositMoney };

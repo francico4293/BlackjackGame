@@ -4,10 +4,10 @@ var BlackJack = /** @class */ (function () {
     function BlackJack() {
         this.deck = Deck.build();
         this.dealer = Player.build();
-        this.user = Player.build();
+        this.player = Player.build();
     }
     BlackJack.prototype.start = function () {
-        BlackJack.BALANCE.innerText = "Remaining Balance: $".concat(5000);
+        BlackJack.BALANCE.innerText = "Remaining Balance: $".concat(this.player.money);
         BlackJack.CURRENT_HAND.innerText = 'Current Hand: $0';
         BlackJack.USER_TOTAL.textContent = 'Your total: ';
         BlackJack.DEALER_TOTAL.textContent = 'Dealer Total: ';
@@ -15,9 +15,60 @@ var BlackJack = /** @class */ (function () {
         BlackJack.PLAY_AGAIN_BUTTON.style.display = 'none';
         BlackJack.USER_CARDS.innerHTML = '';
         BlackJack.DEALER_CARDS.innerHTML = '';
+        this.renderChips();
+        BlackJack.GAME_MESSAGE.innerText = "Place your bet. Press 'Play Hand' when ready";
+        BlackJack.PLAY_HAND_BUTTON.style.display = 'block';
+        BlackJack.PLAY_HAND_BUTTON.addEventListener('click', this.dealAndRenderHand);
     };
     BlackJack.prototype.hit = function () { };
     BlackJack.prototype.stay = function () { };
+    BlackJack.prototype.dealAndRenderHand = function () {
+        for (var count = 0; count < 4; count++) {
+            count % 2 === 0
+                ? this.dealCard(this.player)
+                : this.dealCard(this.dealer);
+        }
+        this.renderHand();
+    };
+    BlackJack.prototype.renderHand = function () {
+        this.player.cards.forEach(function (card) { return card.render(BlackJack.USER_CARDS); });
+    };
+    BlackJack.prototype.dealCard = function (player) {
+        player.addCard(this.deck.randomCard);
+    };
+    BlackJack.prototype.renderChips = function () {
+        if (this.player.money < 1) {
+            BlackJack.ONE_DOLLAR_CHIP.classList.add('disabled');
+        }
+        else {
+            BlackJack.ONE_DOLLAR_CHIP.classList.remove('disabled');
+        }
+        if (this.player.money < 5) {
+            BlackJack.FIVE_DOLLAR_CHIP.classList.add('disabled');
+        }
+        else {
+            BlackJack.FIVE_DOLLAR_CHIP.classList.remove('disabled');
+        }
+        if (this.player.money < 10) {
+            BlackJack.TEN_DOLLAR_CHIP.classList.add('disabled');
+        }
+        else {
+            BlackJack.TEN_DOLLAR_CHIP.classList.remove('disabled');
+        }
+        if (this.player.money < 25) {
+            BlackJack.TWENTY_FIVE_DOLLAR_CHIP.classList.add('disabled');
+        }
+        else {
+            BlackJack.TWENTY_FIVE_DOLLAR_CHIP.classList.remove('disabled');
+        }
+        if (this.player.money < 100) {
+            BlackJack.ONE_HUNDRED_DOLLAR_CHIP.classList.add('disabled');
+        }
+        else {
+            BlackJack.ONE_HUNDRED_DOLLAR_CHIP.classList.remove('disabled');
+        }
+        BlackJack.CHIP_BUTTONS.style.display = 'block';
+    };
     BlackJack.GAME_MESSAGE = document.getElementById('game-message');
     BlackJack.USER_CARDS = document.getElementById('user-cards');
     BlackJack.USER_TOTAL = document.getElementById('user-total');
